@@ -6,8 +6,8 @@ class App extends Component {
     console.log(employees)
     return (
       <div id='employees'>
-        <h1>Lista de empleados</h1>
-        <p>Ejercicio para aplicar como front-end en Resuelve.</p>
+        <h1>Lista de empleadosasa</h1>
+        <p>Ejercicio para asssssssssssplicar como front-end en Resuelve.</p>
         <h2>Para JS</h2>
         <ol>
           <li>Clona el proyecto e instala las dependencias</li>
@@ -56,4 +56,4 @@ class App extends Component {
   }
 }
 
-export default App; 
+export default App;
