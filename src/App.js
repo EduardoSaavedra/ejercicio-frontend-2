@@ -5,17 +5,26 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      list : [],
+      list : []
     };
   }
 
+  componentDidMount(){
+    this.setState((state) => {
+      employees.forEach((employee, i ) => {
+        let result = ('$' + (employee.salary).toLocaleString('es-mx'))
+        employees[i].salary = result
+      })
+      state.list = employees
+    })
+  }
 
   render() {
     return (
     <div id='employees'>
         <table>
           <tbody>
-            <tr className="header">
+            <tr className="title">
               <th>Id</th>
               <th>Name</th>
               <th>Company</th>
@@ -34,17 +43,20 @@ class App extends Component {
               <td>{item.age}</td>
               <td>{item.phone}</td>
               <td>{item.email}</td>
-              <a className="delete" onClick={this.deleteUser.bind(this,item)} href='#'>X</a>
             </tr>
               )
             })}
           </tbody>
         </table>
 
-
+        <button
+          onClick={this.addUser}
+          type="submit">Add employee</button>
      </div>
     )
   }
 }
 
 export default App;
+
+// <button type="button" onClick={this.deleteUser.bind(this,item)} ><i className="fas fa-minus-circle"></i></button> line 48 after </tr>
