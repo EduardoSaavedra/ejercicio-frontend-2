@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import employees from './employees';
+import AddEmployee from './employees/addEmployee.js'
 
 class App extends Component {
   constructor(props){
@@ -7,6 +8,14 @@ class App extends Component {
     this.state = {
       list : []
     };
+    this.addUser = this.addUser.bind(this);
+    this.deleteUser = this.deleteUser.bind(this);
+  }
+
+  addUser = () => {
+    this.setState({
+        add : this.state.list
+    })
   }
 
   componentDidMount(){
@@ -19,9 +28,18 @@ class App extends Component {
     })
   }
 
+  deleteUser = (item) => {
+  let {list} = this.state;
+  list.splice(item.id,1);
+  this.setState({
+    list : list
+  });
+}
+
   render() {
     return (
     <div id='employees'>
+    <h1> Employees List</h1>
         <table>
           <tbody>
             <tr className="title">
@@ -43,20 +61,17 @@ class App extends Component {
               <td>{item.age}</td>
               <td>{item.phone}</td>
               <td>{item.email}</td>
+              <button type="button" onClick={this.deleteUser}><i className="fas fa-trash-alt"></i></button>
             </tr>
               )
             })}
           </tbody>
         </table>
 
-        <button
-          onClick={this.addUser}
-          type="submit">Add employee</button>
+        <AddEmployee />
      </div>
     )
   }
 }
 
 export default App;
-
-// <button type="button" onClick={this.deleteUser.bind(this,item)} ><i className="fas fa-minus-circle"></i></button> line 48 after </tr>
