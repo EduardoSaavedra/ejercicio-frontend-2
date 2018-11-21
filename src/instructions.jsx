@@ -11,7 +11,7 @@
           </ul>
           <li>Adicionalmente en la tabla se debe de poder</li>
           <ul>
-      DONE  <li>Agregar empleados (Un botón al principio o final de la tabla)</li>
+      <li>Agregar empleados (Un botón al principio o final de la tabla)</li>
             <li>Editar empleados (Un botón al principio o final de la tabla)</li>
             <li>El nombre de la empresa no se debe poder modificar</li>
         DONE    <li>Borrar empleados (Un botón de borrar por cada empleado)</li>

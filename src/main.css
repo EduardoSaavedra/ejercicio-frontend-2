@@ -43,7 +43,7 @@ h1{
 }
 
 td:hover{
-  background-color: #ff8080;
+  background-color: #ccccb3;
   cursor: all-scroll;
 }
 
@@ -57,7 +57,6 @@ button:hover{
   color: white;
   text-align: center;
   display: inline-block;
-  margin: 4px 2px;
   -webkit-transition-duration: 0.1s;
   transition-duration: 0.4s;
   cursor: pointer;

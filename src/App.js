@@ -69,8 +69,8 @@ printEmployees(item){
 
         <button
           className="empleadosEnConsola"
-          onClick={this.printEmployees}
-        > Employees list in the console
+          onClick={this.printEmployees}>
+          List Employees in the console
         </button>
 
         <AddEmployee addItem={this.add}/>
