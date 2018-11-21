@@ -6,23 +6,17 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      list : []
+      list : [],
     };
-    this.addUser = this.addUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
-  }
-
-  addUser = () => {
-    this.setState({
-        add : this.state.list
-    })
+    this.printEmployees = this.printEmployees.bind(this);
   }
 
   componentDidMount(){
     this.setState((state) => {
       employees.forEach((employee, i ) => {
-        let result = ('$' + (employee.salary).toLocaleString('es-mx'))
-        employees[i].salary = result
+        let money = ('$' + (employee.salary).toLocaleString('es-mx'))
+        employees[i].salary = money
       })
       state.list = employees
     })
@@ -34,6 +28,11 @@ class App extends Component {
   this.setState({
     list : list
   });
+}
+
+printEmployees(item){
+  var printer = employees
+  console.log(printer)
 }
 
   render() {
@@ -51,16 +50,16 @@ class App extends Component {
               <th>Phone</th>
               <th>Email</th>
             </tr>
-              {this.state.list.map(item => {
+              {this.state.list.map(worker => {
                 return (
-            <tr className="rows" key={item.id}>
-              <td>{item.id}</td>
-              <td>{item.name}</td>
-              <td>{item.company}</td>
-              <td>{item.salary}</td>
-              <td>{item.age}</td>
-              <td>{item.phone}</td>
-              <td>{item.email}</td>
+            <tr key={worker.id}>
+              <td className="rows">{worker.id}</td>
+              <td className="rows2">{worker.name}</td>
+              <td className="rows">{worker.company}</td>
+              <td className="right">{worker.salary}</td>
+              <td className="rows">{worker.age}</td>
+              <td className="rows2">{worker.phone}</td>
+              <td className="rows">{worker.email}</td>
               <button type="button" onClick={this.deleteUser}><i className="fas fa-trash-alt"></i></button>
             </tr>
               )
@@ -68,7 +67,13 @@ class App extends Component {
           </tbody>
         </table>
 
-        <AddEmployee />
+        <button
+          className="empleadosEnConsola"
+          onClick={this.printEmployees}
+        > Employees list in the console
+        </button>
+
+        <AddEmployee addItem={this.add}/>
      </div>
     )
   }

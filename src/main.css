@@ -1,5 +1,3 @@
-
-
 body {
   font-family: 'Rubik', sans-serif;
   line-height: 170%; }
@@ -14,9 +12,53 @@ body {
 
 /* Código de la tabla aquí */
 
-h1{
-  margin-left: 20%;
-  color: blue;
+table{
+  align: center;
 }
 
-/*# sourceMappingURL=main.css.map */
+h1{
+  text-align: center;
+  color: black;
+}
+
+.title{
+  background-color: #0066cc;
+}
+
+.rows{
+  background-color: #99e600;
+}
+
+.rows2{
+  background-color: #80bfff;
+}
+
+.right{
+  background-color: #80bfff;
+  text-align: right;
+}
+
+.salary{
+  color:red;
+}
+
+td:hover{
+  background-color: #ff8080;
+  cursor: all-scroll;
+}
+
+button{
+  background-color: transparent;
+  border: 2px solid #99e600;
+}
+
+button:hover{
+  background-color: #99e600;
+  color: white;
+  text-align: center;
+  display: inline-block;
+  margin: 4px 2px;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
