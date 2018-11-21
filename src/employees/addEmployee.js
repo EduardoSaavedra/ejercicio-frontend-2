@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import $ from "jquery";
 
 class AddEmployee extends Component {
  constructor (props){
@@ -21,6 +22,7 @@ class AddEmployee extends Component {
    this.updatePhone = this.updatePhone.bind(this);
    this.updateEmail = this.updateEmail.bind(this);
    this.add = this.add.bind(this);
+   this.addUser = this.addUser.bind(this);
 
  }
 
@@ -66,8 +68,25 @@ class AddEmployee extends Component {
    })
  }
 
+ addUser(id, name, company, salary, age, phone, email){
+    $.ajax({
+      method: "POST",
+      url: "/",
+      contentType: 'application/json',
+      data: JSON.stringify({
+        id: id,
+        name: name,
+        company: company,
+        salary: salary,
+        age: age,
+        phone: phone,
+        email: email
+      })
+    })
+  }
+
  add(){
-    this.props.addItem(this.state.id, this.state.name, this.state.company, this.state.salary, this.state.age, this.state.phone, this.state.email);
+    this.addUser(this.state.id, this.state.name, this.state.company, this.state.salary, this.state.age, this.state.phone, this.state.email);
     this.setState({
       id:"",
       name:"",

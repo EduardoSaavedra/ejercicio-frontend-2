@@ -7,14 +7,14 @@
           <ul>
             <li>El salario está en pesos mexicanos</li>
             <li>Mostrar el salario en formato de dinero, es decir 16900 se muestra como $ 16,900.00</li>
-        DONE    <li>Si el salario tuviera decimales se deben mostrar limitados a 2 decimales, es decir 16900.333 se debe mostrar como $ 16,900.33</li>
+            <li>Si el salario tuviera decimales se deben mostrar limitados a 2 decimales, es decir 16900.333 se debe mostrar como $ 16,900.33</li>
           </ul>
           <li>Adicionalmente en la tabla se debe de poder</li>
           <ul>
       <li>Agregar empleados (Un botón al principio o final de la tabla)</li>
             <li>Editar empleados (Un botón al principio o final de la tabla)</li>
             <li>El nombre de la empresa no se debe poder modificar</li>
-        DONE    <li>Borrar empleados (Un botón de borrar por cada empleado)</li>
+            <li>Borrar empleados (Un botón de borrar por cada empleado)</li>
             <li>Agregar un botón que muestre los salarios en USD, tipo de cambio de US $1 = MXN $21.50</li>
           </ul>
           <li>En el estado de <code>src/App.js</code> se deben de mantener</li>
@@ -28,7 +28,7 @@
             <li>El mismo campo debe funcionar para nombre y empresa</li>
             <li>Se deben actualizar los resultados conforme se vayan escribiendo</li>
           </ul>
-        DONE  <li>Agregar un botón que imprima la lista de empleados a la consola</li>
+          <li>Agregar un botón que imprima la lista de empleados a la consola</li>
         </ol>
         <h2>Para CSS</h2>
         <p>Ejecutar SASS con <code>sass -w css/main.scss:src/main.css</code></p>

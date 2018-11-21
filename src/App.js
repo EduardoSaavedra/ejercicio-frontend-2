@@ -73,7 +73,7 @@ printEmployees(item){
           List Employees in the console
         </button>
 
-        <AddEmployee addItem={this.add}/>
+        <AddEmployee addUser={this.addUser}/>
      </div>
     )
   }
