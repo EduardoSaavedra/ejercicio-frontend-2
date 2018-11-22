@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import employees from './employees';
 import AddEmployee from './employees/addEmployee.js'
+import $ from "jquery";
 
 class App extends Component {
   constructor(props){
@@ -8,8 +9,9 @@ class App extends Component {
     this.state = {
       list : [],
     };
-    this.deleteUser = this.deleteUser.bind(this);
     this.printEmployees = this.printEmployees.bind(this);
+    this.addUser = this.addUser.bind(this);
+
   }
 
   componentDidMount(){
@@ -22,13 +24,31 @@ class App extends Component {
     })
   }
 
-  deleteUser = (item) => {
-  let {list} = this.state;
-  list.splice(item.id,1);
-  this.setState({
-    list : list
-  });
-}
+  addUser(id, name, company, salary, age, phone, email){
+     $.ajax({
+       method: "POST",
+       url: "/",
+       contentType: 'application/json',
+       data: JSON.stringify({
+         id: id,
+         name: name,
+         company: company,
+         salary: salary,
+         age: age,
+         phone: phone,
+         email: email
+       })
+     })
+   }
+
+   deleteUser = (worker, e) => {
+   let {list} = this.state;
+   list.splice(worker.id,1);
+   this.setState({
+     list : list
+   });
+ }
+
 
 printEmployees(item){
   var printer = employees
@@ -60,7 +80,7 @@ printEmployees(item){
               <td className="rows">{worker.age}</td>
               <td className="rows2">{worker.phone}</td>
               <td className="rows">{worker.email}</td>
-              <button type="button" onClick={this.deleteUser}><i className="fas fa-trash-alt"></i></button>
+              <button type="button" onClick={this.deleteUser.bind(this, worker)}><i className="fas fa-trash-alt"></i></button>
             </tr>
               )
             })}
@@ -73,7 +93,7 @@ printEmployees(item){
           List Employees in the console
         </button>
 
-        <AddEmployee addUser={this.addUser}/>
+        <AddEmployee addItem={this.addUser}/>
      </div>
     )
   }
