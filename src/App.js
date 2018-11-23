@@ -11,7 +11,6 @@ class App extends Component {
     };
     this.printEmployees = this.printEmployees.bind(this);
     this.addUser = this.addUser.bind(this);
-
   }
 
   componentDidMount(){
@@ -38,17 +37,31 @@ class App extends Component {
          phone: phone,
          email: email
        })
-     })
-   }
+     }).done(() => {
+     this.getGroceries();
+   });
+ }
+  getGroceries (){
+    $.ajax({
+    url: '/',
+    method: 'GET',
+    success: (results) => {
+      this.setState({list:results});
+    },
+    error: (xhr, err) => {
+      console.log('err', err);
+    }
+  })
+  }
 
    deleteUser = (worker, e) => {
+     console.log('you have deleted employee number', worker.id)
    let {list} = this.state;
    list.splice(worker.id,1);
    this.setState({
      list : list
    });
  }
-
 
 printEmployees(item){
   var printer = employees
@@ -66,6 +79,7 @@ printEmployees(item){
               <th>Name</th>
               <th>Company</th>
               <th>Salary</th>
+              <th>Dollars</th>
               <th>Age</th>
               <th>Phone</th>
               <th>Email</th>
@@ -76,6 +90,7 @@ printEmployees(item){
               <td className="rows">{worker.id}</td>
               <td className="rows2">{worker.name}</td>
               <td className="rows">{worker.company}</td>
+              <td className="right">{worker.salary}</td>
               <td className="right">{worker.salary}</td>
               <td className="rows">{worker.age}</td>
               <td className="rows2">{worker.phone}</td>

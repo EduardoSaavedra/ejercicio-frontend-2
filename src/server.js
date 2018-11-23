@@ -1,8 +1,11 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var database = require('./database/index.js');
 
 app.use(bodyParser.json());
+
+app.use(express.static(__dirname + '/../client/dist'));
 
 app.post('/', function(req, res){
   let id = req.body.id;
@@ -13,9 +16,10 @@ app.post('/', function(req, res){
   let phone = req.body.phone;
   let email = req.body.email;
 
- if(!id) {
+ if(!name) {
    res.sendStatus(400);
  } else {
+   database.insertOne(id, name, company, salary, age, phone, email, (err, results) => {
      if (err) {
        res.sendStatus(500);
      } else {
@@ -23,3 +27,16 @@ app.post('/', function(req, res){
      }
    });
  }
+});
+
+app.get('/resuelve', function(req, res){
+  database.selectAll((err, results) => {
+     if(err) {
+       console.log('errrrrrrr hitting the database');
+       res.sendStatus(500);
+     } else {
+       res.status(200).json(results);
+     }
+   })
+ //res.status(200).json(data);
+})
