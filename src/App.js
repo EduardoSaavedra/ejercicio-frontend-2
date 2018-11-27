@@ -26,13 +26,12 @@ class App extends Component {
   addUser(id, name, company, salary, age, phone, email){
     const newList = this.state.list;
     const existingItem = newList.find(element => element.name === name);
-
     if(existingItem){
       const newEmployeeFromAdd = parseInt(name);
       const existingItem = parseInt(existingItem.name);
       existingItem.name = existingItem + newEmployeeFromAdd;
     } else {
-      newList.push({ id: id, name: name, company: company, salary: salary, age: age, phone: phone, email: email})
+      newList.push({ id: id, name: name, company: company, salary: ('$' + salary).toLocaleString('es-mx'), age: age, phone: phone, email: email})
     }
     this.setState({
       list: newList
@@ -41,7 +40,7 @@ class App extends Component {
 
   dollars = (item) => {
     console.log('you have clicked', item.salary )
-    var dolares = item.salary;
+    var dolares = item.salary * 21.50;
     //can't multiply de values, when i multiply i get an NAN
         alert(dolares)
   }
