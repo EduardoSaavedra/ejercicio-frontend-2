@@ -6,25 +6,44 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state = {
-      list : [],
+      employees: employees.map( employee => ({
+        ...employee,
+        // Convert to dollars
+        salary: employee.salary/21.50
+      }))
     };
     this.printEmployees = this.printEmployees.bind(this);
     this.addUser = this.addUser.bind(this);
   }
 
-  componentDidMount(){
-    this.setState((state) => {
-      employees.forEach((employee, i ) => {
-        let money = ('$' + (employee.salary / 21.5).toLocaleString('es-mx'))
-        // let dolares = ('$' + (employee.salary * 21.50).toLocaleString('es-mx'))
-        employees[i].salary = money
-      })
-      state.list = employees
+  addEmployee = (id, name, company, salary, age, phone, email) => {
+    this.setState( (prevState) => {
+      // Get the employees from the state
+      const { employees } = prevState
+      // find a user with that id
+      const existingUser = employees.find(employee => employee.id.toString() === id);
+
+      // Create a new array removing the existingUser if it exists
+      const updatedEmployees = employees.filter(employee => !existingUser || employee.id !== existingUser.id )
+
+      // Return the new state
+      return {
+        employees: [...updatedEmployees, {
+          id,
+          name,
+          company,
+          salary,
+          age,
+          phone,
+          email
+        }]
+      }
+      
     })
   }
 
   addUser(id, name, company, salary, age, phone, email){
-    const newList = this.state.list;
+    const newList = this.state.employees;
     const existingItem = newList.find(element => element.name === name);
     if(existingItem){
       const newEmployeeFromAdd = parseInt(name);
@@ -34,29 +53,28 @@ class App extends Component {
       newList.push({ id: id, name: name, company: company, salary: ('$' + salary).toLocaleString('es-mx'), age: age, phone: phone, email: email})
     }
     this.setState({
-      list: newList
+      employees: newList
     });
   }
 
-  dollars = (item) => {
-    console.log('you have clicked', item.salary )
-    var dolares = item.salary * 21.50;
-    //can't multiply de values, when i multiply i get an NAN
-        alert(dolares)
+  dollars = (salary) => {
+    console.log('you have clicked', salary )
+    const dolares = salary * 21.50;
+    alert(dolares)
   }
 
-   deleteUser = (worker, e) => {
-     console.log('you have deleted employee number', worker.id)
-   let {list} = this.state;
-   list.splice(worker.id,1);
-   this.setState({
-     list : list
-   });
+   deleteUser = (id) => {
+    console.log('you have deleted employee number', id)
+   
+   this.setState((prevState) => ({
+     // Filter the deleted employee
+     employees: prevState.employees.filter(employee => employee.id !== id)
+   }));
  }
 
-printEmployees(item){
+printEmployees(){
   var printer = employees
-  console.log(printer)
+  console.table(printer)
 }
 
   render() {
@@ -75,21 +93,29 @@ printEmployees(item){
               <th>Phone</th>
               <th>Email</th>
             </tr>
-              {this.state.list.map(worker => {
-                return (
-            <tr key={worker.id}>
-              <td className="rows">{worker.id}</td>
-              <td className="rows2">{worker.name}</td>
-              <td className="rows">{worker.company}</td>
-              <td className="right">{worker.salary}</td>
-              <button onClick={this.dollars.bind(this, worker)}><td>{`DOLLARS`}</td></button>
-              <td className="rows">{worker.age}</td>
-              <td className="rows2">{worker.phone}</td>
-              <td className="rows">{worker.email}</td>
-              <button type="button" onClick={this.deleteUser.bind(this, worker)}><i className="fas fa-trash-alt"></i></button>
-            </tr>
+              {this.state.employees.map(({
+                id,
+                name,
+                company,
+                salary,
+                age,
+                phone,
+                email
+              }) => 
+                (
+                <tr key={id}>
+                  <td className="rows">{id}</td>
+                  <td className="rows2">{name}</td>
+                  <td className="rows">{company}</td>
+                  <td className="right">{`$${salary}`}</td>
+                  <button onClick={this.dollars.bind(this, salary)}><td>{`DOLLARS`}</td></button>
+                  <td className="rows">{age}</td>
+                  <td className="rows2">{phone}</td>
+                  <td className="rows">{email}</td>
+                  <button type="button" onClick={this.deleteUser.bind(this, id)}><i className="fas fa-trash-alt"></i></button>
+                </tr>
               )
-            })}
+            )}
           </tbody>
         </table>
 
@@ -99,7 +125,7 @@ printEmployees(item){
           List Employees in the console
         </button>
 
-        <AddEmployee addItem={this.addUser}/>
+        <AddEmployee addEmployee={this.addEmployee}/>
 
      </div>
     )
